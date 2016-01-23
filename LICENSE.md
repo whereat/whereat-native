@@ -1,3 +1,25 @@
+# NOTICE
+
+ Copyright (c) 2016-present, Total Location Test Paragraph.
+ All rights reserved.
+
+ This file is part of Where@.
+
+ Where@ is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License (below), or
+ (at your option) any later version.
+
+ Where@ is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ A copy of the GNU General Public License is printed below
+ and can also be viewed at <http://www.gnu.org/licenses/gpl-3.0.en.html>.
+
+# LICENSE
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
