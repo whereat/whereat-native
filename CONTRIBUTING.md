@@ -12,7 +12,7 @@ If you have any questions, open an issue or join the [contributor mailing list](
 
 # Being Excellent to One Another
 
-Please note that we seek to cultivate a community of contributors that actively resists deeply ingrained patterns of oppressive behavior prevalent in the tech industry (and most other industries). In particular, we do not tolerate harassment of any kind among our contributors. See the [Geek Feminism Code of Conduct](http://geekfeminism.org/about/code-of-conduct/) for a set of behavioral guidelines we expect our contributors to adhere to, and the Recurse Center [Social Rules](https://www.recurse.com/manual#sub-sec-social-rules) for a set of behavioral practcies we aspire to embody.
+We want contributing to Where@ to be a fun and empowering experience for everyone involved. Toward that end, we ask all contributors to adhere to the [Geek Feminism Code of Conduct](http://geekfeminism.org/about/code-of-conduct/) and encourage them to incorporate Recurse Center's [Five Social Rules](https://www.recurse.com/manual#sub-sec-social-rules) in their interactions.
 
 # Tooling Setup Guide
 
