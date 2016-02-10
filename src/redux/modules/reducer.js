@@ -1,6 +1,6 @@
-import {combineReducers} from 'redux';
+const combineReducers = require('redux').combineReducers;
 
-import location from "./location";
+const {reducer as location} = require("./location");
 
 module.exports = combineReducers({
 	location

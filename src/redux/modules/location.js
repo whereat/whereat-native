@@ -1,6 +1,6 @@
-export const LOCATION_CHANGED = "LOCATION_CHANGED";
+const LOCATION_CHANGED = "LOCATION_CHANGED";
 
-export default function reducer(state = {}, action) {
+function reducer(state = {}, action) {
 	switch(action.type) {
 		case LOCATION_CHANGED:
 		return {
@@ -13,9 +13,11 @@ export default function reducer(state = {}, action) {
 	}
 }
 
-export function locationChanged(location) {
+function locationChanged(location) {
 	return {
 		type: LOCATION_CHANGED,
 		location: location
 	}
 }
+
+module.exports = {locationChanged: locationChanged, LOCATION_CHANGED: LOCATION_CHANGED, reducer: reducer};
