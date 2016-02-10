@@ -5,7 +5,6 @@ import React, {
 } from 'react-native';
 
 import App from './src/containers/App';
-import WhereatApp from './src/containers/WhereatApp';
 import Provider from './src/containers/Provider';
 
 class whereatClient extends Component {
