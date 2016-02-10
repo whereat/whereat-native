@@ -1,19 +1,13 @@
-import React, {Component} from 'react';
-import {createStore, bindActionCreators} from 'redux';
-import {connect, Provider} from 'react-redux';
+import React, {Component, Text} from 'react-native';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
-import reducer from '~/redux/modules/reducer';
-
-import {locationChanged} from '~/redux/modules/location';
-
-const store = createStore(reducer);
+import {locationChanged} from '../redux/modules/location';
 
 export default class App extends Component {
 	render() {
 		return (
-			<Provider store = {store}>
-				<Text>HI</Text>
-			</Provider>
+			<Text>{this.props.location.latitude}</Text>
 		);
 	}
 }
@@ -30,4 +24,4 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(App);
