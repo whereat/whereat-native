@@ -65,3 +65,6 @@
 # stetho
 
 -dontwarn com.facebook.stetho.**
+
+# mapzen
+-dontwarn com.mapzen.android.lost.**

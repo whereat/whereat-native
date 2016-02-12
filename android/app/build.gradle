@@ -88,6 +88,9 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
     splits {
         abi {
             enable enableSeparateBuildPerCPUArchitecture
