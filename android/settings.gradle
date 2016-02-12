@@ -1,3 +1,6 @@
 rootProject.name = 'whereatClient'
 
 include ':app'
+
+include ':lostlocationprovider'
+project(':lostlocationprovider').projectDir = new File(settingsDir, '../node_modules/lostlocationprovider')
