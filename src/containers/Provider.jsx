@@ -4,12 +4,22 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from '../redux/modules/reducer';
 
-const store = createStore(reducer, {location:{currentLocation:{latitude:3,longitude:2,lastUpdatedTime:2}}});
+const startingState = {
+	location: {
+		currentLocation: {
+			latitude: 42.645650,
+			longitude: -73.754199,
+			lastUpdatedTime: 1455227589
+		}
+	}
+};
+
+const store = createStore(reducer, startingState);
 
 export default class ReduxProvider extends Component {
 	render() {
 		return (
-			<Provider store = {store}>
+			<Provider store={store}>
 				{this.props.children}
 			</Provider>
 		);

@@ -10,9 +10,9 @@ import Provider from './src/containers/Provider';
 class whereatClient extends Component {
   render() {
     return (
-		<Provider>
-			<App />
-		</Provider>
+      <Provider>
+        <App />
+      </Provider>
     );
   }
 }

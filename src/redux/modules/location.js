@@ -20,4 +20,8 @@ function locationChanged(location) {
 	}
 }
 
-module.exports = {locationChanged: locationChanged, LOCATION_CHANGED: LOCATION_CHANGED, reducer: reducer};
+module.exports = {
+	LOCATION_CHANGED,
+	reducer,
+	locationChanged
+}

@@ -1,7 +1,6 @@
 const combineReducers = require('redux').combineReducers;
+const location = require("./location").reducer;
 
-const {reducer as location} = require("./location");
-
-module.exports = combineReducers({
+export default combineReducers({
 	location
 });
