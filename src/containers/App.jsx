@@ -1,13 +1,15 @@
-import React, {Component, Text} from 'react-native';
+import React, {Component, Text, View} from 'react-native';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {locationChanged} from '../redux/modules/location';
 
+import OSMMapView from '../components/OSMMapView';
+
 export default class App extends Component {
 	render() {
 		return (
-			<Text>{this.props.location.latitude}</Text>
+			<OSMMapView style={{height: 200, width: 200}}/>
 		);
 	}
 }
