@@ -1,3 +1,5 @@
+# intellij
+
 # OSX
 #
 .DS_Store
@@ -27,11 +29,41 @@ project.xcworkspace
 .idea
 .gradle
 local.properties
+/local.properties
 *.iml
 *.ipr
 *.iws
+android/whereatClient.iml
+
+# android build files
+.gradle
+/build
+/*/build/
+app-release.apk
+*.apk
+
 
 # node.js
 #
 node_modules/
 npm-debug.log
+
+# Generated files
+bin/
+gen/
+proguard/
+.signing/
+*.log
+app/src/test/coverage/*
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+
+android/whereatClient.iml

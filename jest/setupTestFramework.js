@@ -6,4 +6,4 @@
 // Turn auto-mocking off. We'll mock everything out purposefully for the sake of increased determinism and clarity
 jest.autoMockOff();
 
-const should = require('chai').should();
+  const should = require('chai').should();
