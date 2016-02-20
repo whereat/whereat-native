@@ -1,4 +1,4 @@
-package com.whereatclient;
+package io.whereat.mobile;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import io.whereat.lostlocationprovider.LOSTLocationPackage;
+import io.whereat.mobile.BuildConfig;
 
 public class MainActivity extends ReactActivity {
 

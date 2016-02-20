@@ -1,4 +1,4 @@
-rootProject.name = 'whereatClient'
+rootProject.name = 'whereat-mobile'
 
 include ':app'
 

@@ -1,4 +1,4 @@
-package com.whereatclient;
+package io.whereat.mobile;
 
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;

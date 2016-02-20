@@ -79,7 +79,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.whereatclient"
+        applicationId "io.whereat.mobile"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -122,8 +122,15 @@ android {
 
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
+    compile project(':lostlocationprovider')
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:0.19.+"
-    compile project(':lostlocationprovider')
     compile 'org.osmdroid:osmdroid-android:5.1@aar'
+    testCompile 'org.mockito:mockito-core:2.0.42-beta'
+    testCompile 'org.assertj:assertj-core:3.3.0'
+    testCompile 'org.robolectric:robolectric:3.0'
+    testCompile 'org.robolectric:robolectric-shadows:3.0'
+    testCompile 'org.robolectric:robolectric-annotations:3.0'
+    testCompile 'org.robolectric:robolectric-annotations:3.0'
+    testCompile 'org.robolectric:shadows-core:3.0'
 }

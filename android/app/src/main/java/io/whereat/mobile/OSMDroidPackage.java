@@ -1,4 +1,4 @@
-package com.whereatclient;
+package io.whereat.mobile;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
