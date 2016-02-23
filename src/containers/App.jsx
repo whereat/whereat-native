@@ -9,12 +9,12 @@ import {connect} from 'react-redux';
 
 import {locationChanged} from '../redux/modules/location';
 
-import OSMMapView from '../components/OSMMapView';
+import MapView from '../components/MapView';
 
 export default class App extends Component {
   render() {
     return (
-      <OSMMapView style={styles.map}/>
+      <MapView style={styles.map}/>
     );
   }
 }

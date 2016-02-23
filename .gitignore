@@ -67,3 +67,6 @@ Thumbs.db
 
 
 android/whereatClient.iml
+
+# emacs
+.tern-port

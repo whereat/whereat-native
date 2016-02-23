@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class OSMDroidPackage implements ReactPackage {
+public class OsmDroidMapViewPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Collections.emptyList();
@@ -24,7 +24,7 @@ public class OSMDroidPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         ArrayList<ViewManager> viewManagers = new ArrayList<>();
-        viewManagers.add(new OSMMapViewManager());
+        viewManagers.add(new OsmDroidMapViewManager());
         return viewManagers;
     }
 }

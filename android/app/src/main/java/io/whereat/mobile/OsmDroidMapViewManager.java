@@ -8,10 +8,10 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
-public class OSMMapViewManager extends SimpleViewManager<MapView> {
+public class OsmDroidMapViewManager extends SimpleViewManager<MapView> {
     @Override
     public String getName() {
-        return "OSMMapView";
+        return "OsmDroidMapView";
     }
 
     @Override

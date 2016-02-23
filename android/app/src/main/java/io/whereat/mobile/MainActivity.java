@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import io.whereat.lostlocationprovider.LOSTLocationPackage;
-import io.whereat.mobile.BuildConfig;
 
 public class MainActivity extends ReactActivity {
 
@@ -39,7 +38,7 @@ public class MainActivity extends ReactActivity {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
         new LOSTLocationPackage(),
-        new OSMDroidPackage()
+        new OsmDroidMapViewPackage()
       );
     }
 }

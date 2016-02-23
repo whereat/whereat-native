@@ -1,10 +1,10 @@
 import {requireNativeComponent, View} from 'react-native';
 
 const iface = {
-  name: "OSMMapView",
+  name: "OsmDroidMapView",
   propTypes: {
     ...View.propTypes
   }
-}
+};
 
-export default requireNativeComponent('OSMMapView', iface);
+export default requireNativeComponent('OsmDroidMapView', iface);
