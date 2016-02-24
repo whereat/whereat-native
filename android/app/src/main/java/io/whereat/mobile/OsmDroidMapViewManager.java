@@ -9,9 +9,12 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
 public class OsmDroidMapViewManager extends SimpleViewManager<MapView> {
+
+    public static final String NAME = "OsmDroidMapView";
+
     @Override
     public String getName() {
-        return "OsmDroidMapView";
+        return NAME;
     }
 
     @Override
@@ -24,7 +27,7 @@ public class OsmDroidMapViewManager extends SimpleViewManager<MapView> {
 
         IMapController mapController = map.getController();
         mapController.setZoom(13);
-        mapController.setCenter(new GeoPoint(40.7447038,-73.9870748));
+        mapController.setCenter(new GeoPoint(40.7447038, -73.9870748));
 
         return map;
     }

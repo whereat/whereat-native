@@ -6,6 +6,7 @@ import android.content.Context;
 import com.facebook.react.bridge.ReactTestHelper;
 import com.facebook.react.uimanager.ThemedReactContext;
 
+import org.assertj.core.data.Offset;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,22 +18,22 @@ import org.robolectric.annotation.Config;
 
 import io.whereat.mobile.support.FakeZoomButtonsController;
 
-import static io.whereat.mobile.support.Matchers.isWithin;
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.data.Offset.offset;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, shadows=FakeZoomButtonsController.class)
 
 public class OsmDroidMapViewManagerTest {
 
+    private static final Offset<Double> MARGIN = offset(.0001);
     OsmDroidMapViewManager viewMgr;
-    Context ctx;
     ThemedReactContext themedCtx;
 
     @Before
     public void setup() throws Exception {
         viewMgr = new OsmDroidMapViewManager();
-        ctx = Robolectric.buildActivity(Activity.class).create().start().resume().visible().get();
+        Context ctx = Robolectric.buildActivity(Activity.class).create().start().resume().visible().get();
         themedCtx = new ThemedReactContext(ReactTestHelper.createCatalystContextForTest(), ctx);
     }
 
@@ -52,7 +53,7 @@ public class OsmDroidMapViewManagerTest {
         assertThat(map.canZoomOut()).isTrue();
 
         assertThat(map.getZoomLevel()).isEqualTo(13);
-        assertThat(isWithin(map.getMapCenter().getLatitude(), 40.7447038, .0001)).isTrue();
-        assertThat(isWithin(map.getMapCenter().getLongitude(), -73.9870748, .0001)).isTrue();
+        assertThat(map.getMapCenter().getLatitude()).isEqualTo(40.7447038, MARGIN);
+        assertThat(map.getMapCenter().getLongitude()).isEqualTo(-73.9870748, MARGIN);
     }
 }
