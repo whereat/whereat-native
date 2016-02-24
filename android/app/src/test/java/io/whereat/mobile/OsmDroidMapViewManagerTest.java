@@ -86,8 +86,8 @@ public class OsmDroidMapViewManagerTest {
         viewMgr.setZoom(map, 13);
         viewMgr.setCenter(map, center); // TODO -- this test fails at zoom levels 0-12, but passes at 13 upwards
 
-        assertThat(map.getMapCenter().getLatitude()).isEqualTo(NEW_LAT, MARGIN);
-        assertThat(map.getMapCenter().getLongitude()).isEqualTo(NEW_LON, MARGIN);
+        assertThat(map.getMapCenter().getLatitude()).isCloseTo(NEW_LAT, MARGIN);
+        assertThat(map.getMapCenter().getLongitude()).isCloseTo(NEW_LON, MARGIN);
     }
 
     @Ignore
