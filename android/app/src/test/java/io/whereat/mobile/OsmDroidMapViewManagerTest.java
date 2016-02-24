@@ -3,6 +3,7 @@ package io.whereat.mobile;
 import android.app.Activity;
 import android.content.Context;
 
+import com.facebook.react.bridge.JavaOnlyMap;
 import com.facebook.react.bridge.ReactTestHelper;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -18,11 +19,9 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import io.whereat.mobile.support.FakeZoomButtonsController;
-import io.whereat.mobile.support.TestWritableMap;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.data.Offset.offset;
-import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, shadows=FakeZoomButtonsController.class)
@@ -73,7 +72,7 @@ public class OsmDroidMapViewManagerTest {
     @Test
     public void setCenter_should_reCenterTheMapView() throws Exception {
 
-        WritableMap center = new TestWritableMap();
+        WritableMap center = new JavaOnlyMap();
         center.putDouble("lat", NEW_LAT);
         center.putDouble("lon", NEW_LON);
 
