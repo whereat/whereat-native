@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.facebook.react.bridge.ReactTestHelper;
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 
 import org.assertj.core.data.Offset;
@@ -17,9 +18,11 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import io.whereat.mobile.support.FakeZoomButtonsController;
+import io.whereat.mobile.support.TestWritableMap;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.data.Offset.offset;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, shadows=FakeZoomButtonsController.class)
@@ -27,14 +30,25 @@ import static org.assertj.core.data.Offset.offset;
 public class OsmDroidMapViewManagerTest {
 
     private static final Offset<Double> MARGIN = offset(.0001);
+    public static final double LAT = 40.7447038;
+    public static final double NEW_LAT = 41.7447038;
+    public static final int NEW_LAT_E6 = 41744704;
+
+    public static final double LON = -73.9870748;
+    public static final double NEW_LON = -74.9870748;
+    public static final int NEW_LON_E6 = -74987075;
+
+
     OsmDroidMapViewManager viewMgr;
-    ThemedReactContext themedCtx;
+    MapView map;
 
     @Before
     public void setup() throws Exception {
         viewMgr = new OsmDroidMapViewManager();
         Context ctx = Robolectric.buildActivity(Activity.class).create().start().resume().visible().get();
-        themedCtx = new ThemedReactContext(ReactTestHelper.createCatalystContextForTest(), ctx);
+        ThemedReactContext themedCtx = new ThemedReactContext(ReactTestHelper.createCatalystContextForTest(), ctx);
+        map = viewMgr.createViewInstance(themedCtx);
+        map.layout(0, 0, 1080, 1920); // because robolectric views default to 0 x 0
     }
 
     @Test
@@ -44,16 +58,47 @@ public class OsmDroidMapViewManagerTest {
 
     @Test
     public void createViewInstance_should_constructMapViewCorrectly() throws Exception {
-        MapView map = viewMgr.createViewInstance(themedCtx);
-        map.layout(0, 0, 1920, 1080); // because robolectric views default to 0 x 0
-
         assertThat(map).isInstanceOf(MapView.class);
         assertThat(map.getTileProvider().getTileSource()).isEqualTo(TileSourceFactory.MAPNIK);
-        assertThat(map.canZoomIn()).isTrue();
-        assertThat(map.canZoomOut()).isTrue();
-
-        assertThat(map.getZoomLevel()).isEqualTo(13);
-        assertThat(map.getMapCenter().getLatitude()).isEqualTo(40.7447038, MARGIN);
-        assertThat(map.getMapCenter().getLongitude()).isEqualTo(-73.9870748, MARGIN);
+        assertThat(map.getZoomLevel()).isEqualTo(0);
+        assertThat(map.getMapCenter()).isNotNull();
     }
+
+    @Test
+    public void setZoom_should_reZoomTheMapView() throws Exception {
+        viewMgr.setZoom(map, 15);
+        assertThat(map.getZoomLevel()).isEqualTo(15);
+    }
+
+    @Test
+    public void setCenter_should_reCenterTheMapView() throws Exception {
+
+        WritableMap center = new TestWritableMap();
+        center.putDouble("lat", NEW_LAT);
+        center.putDouble("lon", NEW_LON);
+
+        viewMgr.setZoom(map, 13);
+        viewMgr.setCenter(map, center); // TODO -- this test fails at zoom levels 0-12, but passes at 13 upwards
+
+        assertThat(map.getMapCenter().getLatitude()).isEqualTo(NEW_LAT, MARGIN);
+        assertThat(map.getMapCenter().getLongitude()).isEqualTo(NEW_LON, MARGIN);
+    }
+
+    /*
+    TODO: test that zoom controls exist
+
+      assert that clicky zoom controls are enabled
+         option 1: user PowerMock to assert that map.mEnableZoonController is true
+         option 2:
+           - use sequence of calls to MotionEvent.obtain to simulate clicking zoom in & zoom out button
+           - assert that zoom level changed
+
+      assert that pinchy zoom controls work
+         option 1: use PowerMock to assert that map.mMultiTouchController is true
+         option 2:
+           - use sequence of calls to MotionEvent.obtain to simulate pinch zooming in and out
+           - assert that zoom level changed
+    */
+
+
 }

@@ -1,5 +1,7 @@
 package io.whereat.mobile;
 
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.uimanager.ReactProp;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 
@@ -25,10 +27,20 @@ public class OsmDroidMapViewManager extends SimpleViewManager<MapView> {
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
 
-        IMapController mapController = map.getController();
-        mapController.setZoom(13);
-        mapController.setCenter(new GeoPoint(40.7447038, -73.9870748));
-
         return map;
     }
+
+    @ReactProp(name = "center")
+    public void setCenter(MapView map, ReadableMap center){
+        GeoPoint geoCenter = new GeoPoint(center.getDouble("lat"), center.getDouble("lon"));
+        map.getController().setCenter(geoCenter);
+    }
+
+    @ReactProp(name = "zoom")
+    public void setZoom(MapView map, Integer zoom){
+        map.getController().setZoom(zoom);
+    }
+
+
+
 }
