@@ -10,6 +10,7 @@ import com.facebook.react.uimanager.ThemedReactContext;
 
 import org.assertj.core.data.Offset;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -18,8 +19,12 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
+import java.lang.reflect.Field;
+import java.util.Collections;
+
 import io.whereat.mobile.support.FakeZoomButtonsController;
 
+import static io.whereat.mobile.support.TestUtil.extractPrivateField;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.data.Offset.offset;
 
@@ -59,9 +64,12 @@ public class OsmDroidMapViewManagerTest {
     public void createViewInstance_should_constructMapViewCorrectly() throws Exception {
         assertThat(map).isInstanceOf(MapView.class);
         assertThat(map.getTileProvider().getTileSource()).isEqualTo(TileSourceFactory.MAPNIK);
+        assertThat(extractPrivateField(map, "mEnableZoomController")).isEqualTo(true); //
+        assertThat(extractPrivateField(map, "mMultiTouchController")).isNotNull();
         assertThat(map.getZoomLevel()).isEqualTo(0);
         assertThat(map.getMapCenter()).isNotNull();
     }
+
 
     @Test
     public void setZoom_should_reZoomTheMapView() throws Exception {
@@ -71,7 +79,6 @@ public class OsmDroidMapViewManagerTest {
 
     @Test
     public void setCenter_should_reCenterTheMapView() throws Exception {
-
         WritableMap center = new JavaOnlyMap();
         center.putDouble("lat", NEW_LAT);
         center.putDouble("lon", NEW_LON);
@@ -83,21 +90,15 @@ public class OsmDroidMapViewManagerTest {
         assertThat(map.getMapCenter().getLongitude()).isEqualTo(NEW_LON, MARGIN);
     }
 
-    /*
-    TODO: test that zoom controls exist
+    @Ignore
+    @Test
+    public void clickingZoomButtons_should_zoomTheMap(){
+        //use sequence of calls to MotionEvent.obtain to simulate clicking zoom in & zoom out button
+    }
 
-      assert that clicky zoom controls are enabled
-         option 1: user PowerMock to assert that map.mEnableZoonController is true
-         option 2:
-           - use sequence of calls to MotionEvent.obtain to simulate clicking zoom in & zoom out button
-           - assert that zoom level changed
-
-      assert that pinchy zoom controls work
-         option 1: use PowerMock to assert that map.mMultiTouchController is true
-         option 2:
-           - use sequence of calls to MotionEvent.obtain to simulate pinch zooming in and out
-           - assert that zoom level changed
-    */
-
-
+    @Ignore
+    @Test
+    public void pinching_should_zoomTheMap(){
+        //use sequence of calls to MotionEvent.obtain to simulate pinch zooming in and out
+    }
 }
