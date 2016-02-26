@@ -11,11 +11,11 @@ import org.osmdroid.views.MapView;
 
 public class OsmDroidMapViewManager extends SimpleViewManager<MapView> {
 
-    public static final String NAME = "OsmDroidMapView";
+    public static final String REACT_CLASS = "OsmDroidMapView";
 
     @Override
     public String getName() {
-        return NAME;
+        return REACT_CLASS;
     }
 
     @Override
