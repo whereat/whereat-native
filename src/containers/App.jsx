@@ -14,7 +14,14 @@ import MapView from '../components/MapView';
 export default class App extends Component {
   render() {
     return (
-      <MapView style={styles.map}/>
+      <MapView
+        style={styles.map}
+        zoom={10}
+        center={{
+          lat: 41.8369,
+          lon: -87.6847
+        }}
+      />
     );
   }
 }
