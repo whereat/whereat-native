@@ -1,0 +1,6 @@
+rootProject.name = 'whereat-mobile'
+
+include ':app'
+
+include ':react-native-lostlocationprovider'
+project(':react-native-lostlocationprovider').projectDir = new File(settingsDir, '../node_modules/react-native-lostlocationprovider')
