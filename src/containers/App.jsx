@@ -16,20 +16,20 @@ const LOSTLocationProvider = NativeModules.LOSTLocationProvider;
 import MapView from '../components/MapView';
 
 class App extends Component {
-	componentWillMount() {
-		LOSTLocationProvider.startLocationPolling(500, 0.1, LOSTLocationProvider.HIGH_ACCURACY);
+  componentWillMount() {
+    LOSTLocationProvider.startLocationPolling(500, 0.1, LOSTLocationProvider.HIGH_ACCURACY);
 
-		this.locationChangedListener = DeviceEventEmitter.addListener(
-			'location_changed',
-			(location) => this.props.locationChanged({
-				...location,
-				lastUpdatedTime: new Date().getTime()
-			})
-		);
-	}
+    this.locationChangedListener = DeviceEventEmitter.addListener(
+      'location_changed',
+      (location) => this.props.locationChanged({
+        ...location,
+        lastUpdatedTime: new Date().getTime()
+      })
+    );
+  }
 
-	render() {
-		return (
+  render() {
+    return (
       <View style={styles.container}>
         <View>
           <Text>{`LATITUDE: ${this.props.location.latitude}\n`}</Text>
@@ -45,8 +45,8 @@ class App extends Component {
           }}
         />
       </View>
-		);
-	}
+    );
+  }
 }
 
 function mapStateToProps(state) {
@@ -56,9 +56,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-	return {
-		locationChanged: bindActionCreators(locationChanged, dispatch)
-	};
+  return {
+    locationChanged: bindActionCreators(locationChanged, dispatch)
+  };
 }
 
 const styles = StyleSheet.create({
