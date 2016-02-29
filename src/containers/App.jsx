@@ -2,26 +2,49 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View
+  View,
+  DeviceEventEmitter,
+  NativeModules
 } from 'react-native';
+
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {locationChanged} from '../redux/modules/location';
 
+const LOSTLocationProvider = NativeModules.LOSTLocationProvider;
 import MapView from '../components/MapView';
 
-export default class App extends Component {
+class App extends Component {
+  componentWillMount() {
+    LOSTLocationProvider.startLocationPolling(500, 0.1, LOSTLocationProvider.HIGH_ACCURACY);
+
+    this.locationChangedListener = DeviceEventEmitter.addListener(
+      'location_changed',
+      (location) => this.props.locationChanged({
+        ...location,
+        lastUpdatedTime: new Date().getTime()
+      })
+    );
+  }
+
   render() {
     return (
-      <MapView
-        style={styles.map}
-        zoom={10}
-        center={{
-          lat: 41.8369,
-          lon: -87.6847
-        }}
-      />
+      <View style={styles.container}>
+        <View>
+          <Text>{`LATITUDE: ${this.props.location.latitude}\n`}</Text>
+          <Text>{`LONGITUDE: ${this.props.location.longitude}\n`}</Text>
+          <Text>{`LAST UPDATED TIME: ${this.props.location.lastUpdatedTime}`}</Text>
+        </View>
+        <MapView
+          style={styles.map}
+          zoom={10}
+          center={{
+            lat: 41.8369,
+            lon: -87.6847
+          }}
+        />
+      </View>
     );
   }
 }
@@ -34,11 +57,14 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    locationChanged: bindActionCreators({locationChanged}, dispatch)
+    locationChanged: bindActionCreators(locationChanged, dispatch)
   };
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   map: {
     flex: 1
   }
