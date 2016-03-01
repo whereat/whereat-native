@@ -15,7 +15,7 @@ import {locationChanged} from '../redux/modules/location';
 const LOSTLocationProvider = NativeModules.LOSTLocationProvider;
 import MapView from '../components/MapView';
 
-class App extends Component {
+export class App extends Component {
   componentWillMount() {
     LOSTLocationProvider.startLocationPolling(500, 0.1, LOSTLocationProvider.HIGH_ACCURACY);
 
@@ -49,6 +49,8 @@ class App extends Component {
   }
 }
 
+App.defaultProps = { location: {latitude: 0, longitude: 0, lastUpdatedTime: 0}};
+
 function mapStateToProps(state) {
   return {
     location: state.location.currentLocation
@@ -70,4 +72,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
