@@ -1,20 +1,27 @@
 'use strict';
 import React, {
   AppRegistry,
-  Component
+  Component,
+  StyleSheet,
+  MapView
 } from 'react-native';
 
-import App from './src/containers/App';
-import Provider from './src/containers/Provider';
 
 class whereatClient extends Component {
   render() {
     return (
-      <Provider>
-        <App />
-      </Provider>
+      <MapView
+        style={styles.map}
+        tileOverlayURLTemplate={"http://tile.openstreetmap.org/{z}/{x}/{y}.png"}
+      />
     );
   }
 }
+
+const styles = StyleSheet.create({
+  map: {
+    flex: 1
+  }
+});
 
 AppRegistry.registerComponent('whereatClient', () => whereatClient);
