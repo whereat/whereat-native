@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test-jest": "jest",
-    "test-react-android": "mocha --require test/.setup.android.js test/**/*.js --compilers js:babel-core/register --recursive"
+    "test-react-android": "mocha --require tests/unit/.setup.android.js tests/unit/**/*.js --compilers js:babel-core/register --recursive",
+    "ft": "mocha tests/functional/**/*.js --compilers js:babel-core/register --recursive"
   },
   "jest": {
     "scriptPreprocessor": "node_modules/react-native/jestSupport/preprocessor.js",
@@ -31,11 +32,13 @@
   "devDependencies": {
     "babel-register": "^6.5.2",
     "chai": "^3.5.0",
+    "chai-as-promised": "^5.2.0",
     "enzyme": "^2.0.0",
     "jest-cli": "^0.8.2",
     "mocha": "^2.4.5",
     "mockery": "^1.4.0",
     "react-dom": "^0.14.7",
-    "react-native-mock": "0.0.6"
+    "react-native-mock": "0.0.6",
+    "wd": "^0.4.0"
   }
 }
