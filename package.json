@@ -6,7 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test-jest": "jest",
     "test-react-android": "mocha --require tests/unit/.setup.android.js tests/unit/**/*.js --compilers js:babel-core/register --recursive",
-    "ft": "mocha tests/functional/**/*.js --compilers js:babel-core/register --recursive"
+    "ft": "mocha tests/functional/**/*.js -t 10000 --compilers js:babel-core/register --recursive"
   },
   "jest": {
     "scriptPreprocessor": "node_modules/react-native/jestSupport/preprocessor.js",
