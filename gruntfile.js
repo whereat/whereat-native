@@ -22,6 +22,14 @@ module.exports = function (grunt) {
                 wait: false,
                 quiet: true
             },
+            jest: {
+                options: {
+                    wait: true,
+                    quiet: false
+                },
+                cmd: 'npm',
+                args: ['run-script', 'test-jest']
+            },
             appium: {
                 cmd: 'appium'
             },
@@ -48,11 +56,11 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('unit-test', function () {
+        grunt.task.run('run:jest');
         grunt.task.run('mochaTest:unit');
     });
 
     grunt.registerTask("default", ['unit-test', 'android-functional-test']);
-
     grunt.registerTask("ut", ['unit-test']);
     grunt.registerTask("aft", ['android-functional-test']);
 };
