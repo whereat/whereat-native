@@ -2,24 +2,15 @@ import {
     wd,
     expect,
     should,
-    path
+    androidCapabilities
 } from "./setup"
 
 describe("App", () => {
     var driver;
 
-    const androidCapabilities = {
-        app:path.resolve(__dirname, "../../android/app/build/outputs/apk/app-debug.apk"),
-        browserName: '',
-        'appium-version': '1.5.0',
-        platformName: 'Android',
-        platformVersion: '5.1.0',
-        deviceName: "Android Emulator"
-    };
-
     before(() => {
         driver = wd.promiseChainRemote({ host: 'localhost', port: 4723 });
-        return driver.init(androidCapabilities).setImplicitWaitTimeout(8000);
+        return driver.init(androidCapabilities).setImplicitWaitTimeout(10000);
     });
 
     after(() => {
