@@ -5,8 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test-jest": "jest",
-    "test-react-android": "mocha --require tests/unit/.setup.android.js tests/unit/**/*.js --compilers js:babel-core/register --recursive",
-    "ft": "mocha tests/functional/**/*.js -t 15000 --compilers js:babel-core/register --recursive"
+    "test-react-android": "mocha --require tests/unit/.setup.android.js tests/unit/**/*.js --compilers js:babel-core/register --recursive"
   },
   "jest": {
     "scriptPreprocessor": "node_modules/react-native/jestSupport/preprocessor.js",
@@ -36,6 +35,7 @@
     "enzyme": "^2.0.0",
     "grunt": "^0.4.5",
     "grunt-mocha-test": "^0.12.7",
+    "grunt-run": "^0.5.2",
     "jest-cli": "^0.8.2",
     "load-grunt-tasks": "^3.4.1",
     "mocha": "^2.4.5",

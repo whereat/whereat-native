@@ -10,7 +10,7 @@ describe("App", () => {
 
     before(() => {
         driver = wd.promiseChainRemote({ host: 'localhost', port: 4723 });
-        return driver.init(androidCapabilities).setImplicitWaitTimeout(10000);
+        return driver.init(androidCapabilities).setImplicitWaitTimeout(70000);
     });
 
     after(() => {
