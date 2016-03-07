@@ -3,7 +3,7 @@ import {
     expect,
     should,
     androidCapabilities
-} from "./setup"
+} from "./../.setup"
 
 describe("App", () => {
     var driver;
