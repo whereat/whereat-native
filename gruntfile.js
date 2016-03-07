@@ -10,11 +10,11 @@ module.exports = function (grunt) {
             unit: {
                 src: ['test/unit/.setup.android.js', 'test/unit/**/*.js']
             },
-            functional: {
+            androidFunctional: {
                 options: {
                     timeout: 30000
                 },
-                src: ['test/functional/**/*.js']
+                src: ['test/functional/.setup.js', 'test/functional/android/**/*.js']
             }
         },
         run: {
@@ -29,7 +29,7 @@ module.exports = function (grunt) {
                 cmd: 'react-native',
                 args: ['start']
             },
-            app: {
+            android: {
                 options: {
                     wait: true,
                     quiet: false
@@ -40,16 +40,19 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('ft', function () {
+    grunt.registerTask('android-functional-test', function () {
         grunt.task.run('run:packager');
-        grunt.task.run('run:app');
+        grunt.task.run('run:android');
         grunt.task.run('run:appium');
-        grunt.task.run('mochaTest:functional');
+        grunt.task.run('mochaTest:androidFunctional');
     });
 
-    grunt.registerTask('ut', function () {
+    grunt.registerTask('unit-test', function () {
         grunt.task.run('mochaTest:unit');
     });
 
-    grunt.registerTask("default", ['ut', 'ft']);
+    grunt.registerTask("default", ['unit-test', 'android-functional-test']);
+
+    grunt.registerTask("ut", ['unit-test']);
+    grunt.registerTask("aft", ['android-functional-test']);
 };
