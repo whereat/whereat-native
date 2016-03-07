@@ -9,8 +9,8 @@ describe("App", () => {
     var driver;
 
     before(() => {
-        driver = wd.promiseChainRemote({ host: 'localhost', port: 4723 });
-        return driver.init(androidCapabilities).setImplicitWaitTimeout(70000);
+        driver = wd.promiseChainRemote({host: 'localhost', port: 4723});
+        return driver.init(androidCapabilities).setImplicitWaitTimeout(20000);
     });
 
     after(() => {
@@ -27,6 +27,17 @@ describe("App", () => {
 
             .elementByXPath('//android.widget.TextView[3]')
             .text().should.become('LAST UPDATED TIME: 1455227589')
+    });
+
+    describe("Map", () => {
+        it("should exist", () => {
+            return driver
+                .elementByXPath('//android.widget.LinearLayout[1]' +
+                    '/android.widget.FrameLayout[1]' +
+                    '/android.widget.FrameLayout[1]' +
+                    '/android.view.View[1]')
+                .should.eventually.exist
+        });
     });
 });
 

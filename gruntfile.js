@@ -12,7 +12,7 @@ module.exports = function (grunt) {
             },
             functional: {
                 options: {
-                    timeout: 60000
+                    timeout: 30000
                 },
                 src: ['tests/functional/**/*.js']
             }
@@ -24,6 +24,10 @@ module.exports = function (grunt) {
             },
             appium: {
                 cmd: 'appium'
+            },
+            packager: {
+                cmd: 'react-native',
+                args: ['start']
             },
             app: {
                 options: {
@@ -37,6 +41,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('ft', function () {
+        grunt.task.run('run:packager');
         grunt.task.run('run:app');
         grunt.task.run('run:appium');
         grunt.task.run('mochaTest:functional');
