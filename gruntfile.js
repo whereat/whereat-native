@@ -60,7 +60,15 @@ module.exports = function (grunt) {
         grunt.task.run('mochaTest:unit');
     });
 
-    grunt.registerTask("default", ['unit-test', 'android-functional-test']);
+    grunt.registerTask("default", function () {
+        grunt.task.run('run:packager');
+        grunt.task.run('run:android');
+        grunt.task.run('run:appium');
+        grunt.task.run('run:jest');
+        grunt.task.run('mochaTest:unit');
+        grunt.task.run('mochaTest:androidFunctional');
+    });
+
     grunt.registerTask("ut", ['unit-test']);
     grunt.registerTask("aft", ['android-functional-test']);
 };
