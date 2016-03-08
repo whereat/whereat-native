@@ -3,8 +3,6 @@ import mockery from 'mockery';
 
 require("react-native-mock/mock");
 
-React.Platform.__setOS("android");
-
 React.NativeModules.LOSTLocationProvider = {
     startLocationPolling: () => {},
     latitude: () => {}
