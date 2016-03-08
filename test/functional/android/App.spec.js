@@ -17,26 +17,23 @@ describe("App", () => {
         driver.quit();
     });
 
-    it("should have user's current location", () => {
-        return driver
-            .elementByXPath('//android.widget.TextView[1]')
-            .text().should.become('LATITUDE: 42.64565\n')
-
-            .elementByXPath('//android.widget.TextView[2]')
-            .text().should.become('LONGITUDE: -73.754199\n')
-
-            .elementByXPath('//android.widget.TextView[3]')
-            .text().should.become('LAST UPDATED TIME: 1455227589')
-    });
-
-    describe("Map", () => {
-        it("should exist", () => {
+    describe("MapView", () => {
+        it("should have a map", () => {
             return driver
-                .elementByXPath('//android.widget.LinearLayout[1]' +
-                    '/android.widget.FrameLayout[1]' +
-                    '/android.widget.FrameLayout[1]' +
-                    '/android.view.View[1]')
+                .elementByXPath('//android.view.View')
                 .should.eventually.exist
+        });
+
+        it("should have user's current location", () => {
+            return driver
+                .elementByXPath('//android.widget.TextView[1]')
+                .text().should.become('LATITUDE: 42.64565\n')
+
+                .elementByXPath('//android.widget.TextView[2]')
+                .text().should.become('LONGITUDE: -73.754199\n')
+
+                .elementByXPath('//android.widget.TextView[3]')
+                .text().should.become('LAST UPDATED TIME: 1455227589')
         });
     });
 });
