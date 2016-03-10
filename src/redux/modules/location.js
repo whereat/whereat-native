@@ -3,20 +3,19 @@ const LOCATION_CHANGED = "LOCATION_CHANGED";
 function reducer(state = {}, action) {
 	switch(action.type) {
 		case LOCATION_CHANGED:
-		return {
-			...state,
-			currentLocation: action.location
-		};
-
+			return {
+				...state,
+				location: action.payload.location
+			};
 		default:
-		return state;
+			return state;
 	}
 }
 
 function locationChanged(location) {
 	return {
 		type: LOCATION_CHANGED,
-		location: location
+		payload: { location: location }
 	}
 }
 

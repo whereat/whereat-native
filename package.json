@@ -3,24 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test-jest": "jest",
-    "test-react-android": "mocha --require test/unit/.setup.android.js test/unit/**/*.js --compilers js:babel-core/register --recursive"
-  },
-  "jest": {
-    "scriptPreprocessor": "node_modules/react-native/jestSupport/preprocessor.js",
-    "setupEnvScriptFile": "node_modules/react-native/jestSupport/env.js",
-    "setupTestFrameworkScriptFile": "jest/setupTestFramework.js",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "packager/react-packager/src/Activity/"
-    ],
-    "testFileExtensions": [
-      "js"
-    ],
-    "unmockedModulePathPatterns": [
-      "redux"
-    ]
+    "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
     "react-native": "^0.19.0",
@@ -36,7 +19,6 @@
     "grunt": "^0.4.5",
     "grunt-mocha-test": "^0.12.7",
     "grunt-run": "^0.5.2",
-    "jest-cli": "^0.8.2",
     "load-grunt-tasks": "^3.4.1",
     "mocha": "^2.4.5",
     "mockery": "^1.4.0",
