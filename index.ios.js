@@ -10,15 +10,7 @@ import reducer from './src/redux/modules/reducer';
 
 import App from './src/containers/App';
 
-export const initialState = {
-	location: {
-			latitude: 40.645650,
-			longitude: -75.754199,
-			lastUpdatedTime: 1455227589
-	}
-};
-
-const store = createStore(reducer, initialState);
+const store = createStore(reducer);
 
 class whereatClient extends Component {
   render() {
