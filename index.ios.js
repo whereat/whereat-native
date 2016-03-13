@@ -4,13 +4,18 @@ import React, {
   Component
 } from 'react-native';
 
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import reducer from './src/redux/modules/reducer';
+
 import App from './src/containers/App';
-import Provider from './src/containers/Provider';
+
+const store = createStore(reducer);
 
 class whereatClient extends Component {
   render() {
     return (
-      <Provider>
+      <Provider store={store}>
         <App />
       </Provider>
     );

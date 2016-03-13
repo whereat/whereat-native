@@ -1,22 +1,23 @@
-import { expect, deep } from "chai";
+import chai from 'chai';
+chai.should();
+import {createStore} from 'redux';
+import reducer from '../../../../src/redux/modules/reducer';
+
+import { initialState as initialLocation } from '../../../../src/redux/modules/location';
+const subReducers = [{
+  key: 'location',
+  value: initialLocation
+}];
 
 describe("reducer", () => {
-  const {createStore} = require('redux');
-  const reducer = require('../../../../src/redux/modules/reducer').default;
-
-
-  const subReducers = [
-    {
-      key: 'location', value: {}
-    }
-  ]
 
   subReducers.forEach((subReducer) => {
+
     it(`should have initial ${subReducer.key} key with ${subReducer.value} value`, () => {
       const initialState = createStore(reducer).getState();
 
-      expect(initialState).to.include.keys(subReducer.key);
-      expect(initialState[subReducer.key]).to.deep.equal(subReducer.value);
+      initialState.should.include.keys(subReducer.key);
+      initialState[subReducer.key].should.eql(subReducer.value);
     });
   });
 });

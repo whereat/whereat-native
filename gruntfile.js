@@ -41,7 +41,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('android-functional-test', function () {
-    grunt.task.run('run:packager');
+    grunt.task.run('rgun:packager');
     grunt.task.run('run:android');
     grunt.task.run('run:appium');
     grunt.task.run('mochaTest:androidFunctional');
