@@ -9,24 +9,36 @@ import React, {
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-
 import {locationChanged} from '../redux/modules/location';
-
 const LOSTLocationProvider = NativeModules.LOSTLocationProvider;
+
 import MapView from '../components/MapView';
 
-export class App extends Component {
-  componentWillMount() {
-    LOSTLocationProvider.startLocationPolling(500, 0.1, LOSTLocationProvider.HIGH_ACCURACY);
+  /**
+   * todo:
+   * - change shape of location reducer state tree to eliminate nesting
+   * - use redux-action to reduce boilerploate
+   * - separate location actions and reducers into separate files (decouple actions from reducers: more composable)
+   * - extract all view logic to Root component, leave state logic in App
+   * - extract location update text box to LocationTextBox component
+   * - move MapView props to default state for a `map` reducer and prop object
+   */
 
+
+export class App extends Component {
+  componentDidMount() {
+    LOSTLocationProvider.startLocationPolling(500, 0.1, LOSTLocationProvider.HIGH_ACCURACY);
     this.locationChangedListener = DeviceEventEmitter.addListener(
       'location_changed',
-      (location) => this.props.locationChanged({
-        ...location,
-        lastUpdatedTime: new Date().getTime()
-      })
+      (location) => {
+        this.props.locationChanged({
+          ...location,
+          lastUpdatedTime: new Date().getTime()
+        })
+      }
     );
   }
+
 
   render() {
     return (
@@ -38,10 +50,10 @@ export class App extends Component {
         </View>
         <MapView
           style={styles.map}
-          zoom={10}
+          zoom={12}
           center={{
-            lat: 41.8369,
-            lon: -87.6847
+            lat: this.props.location.latitude,
+            lon: this.props.location.longitude
           }}
         />
       </View>
@@ -51,17 +63,13 @@ export class App extends Component {
 
 App.defaultProps = { location: {latitude: 0, longitude: 0, lastUpdatedTime: 0}};
 
-function mapStateToProps(state) {
-  return {
-    location: state.location.currentLocation
-  };
-}
+const mapStateToProps = state => ({
+  location: state.location.location
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    locationChanged: bindActionCreators(locationChanged, dispatch)
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  locationChanged: bindActionCreators(locationChanged, dispatch)
+});
 
 const styles = StyleSheet.create({
   container: {
