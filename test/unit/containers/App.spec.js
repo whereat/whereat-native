@@ -25,7 +25,7 @@ describe('App container', () => {
 =======
 import React, { View } from "react-native";
 import { shallow } from "enzyme";
-import MapViewAdapter from "../../../src/components/MapViewAdapter.android";
+import MapViewAdapter from "../../../src/components/MapViewAdapter";
 import { expect } from "chai"
 import { App } from "../../../src/containers/App"
 
@@ -41,7 +41,6 @@ describe("App", () => {
       var userLocationView = app.find("View").at(1);
       expect(userLocationView.find("Text").at(0).children().node).to.contain("LATITUDE: 0");
       expect(userLocationView.find("Text").at(1).children().node).to.contain("LONGITUDE: 0");
-      expect(userLocationView.find("Text").at(2).children().node).to.contain("LAST UPDATED TIME: 0");
     });
   });
 

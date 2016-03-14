@@ -13,4 +13,5 @@ mockery.enable({
 
 mockery.registerSubstitute('../components/MapView', '../components/MapView.android');
 mockery.registerSubstitute('../components/MapViewAdapter', '../components/MapViewAdapter.android');
+mockery.registerSubstitute('../../../src/components/MapViewAdapter', '../../../src/components/MapViewAdapter.android');
 mockery.registerSubstitute('../services/LocationService', '../services/LocationService.android');
