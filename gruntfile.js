@@ -8,13 +8,13 @@ module.exports = function (grunt) {
                 require: "babel-core/register"
             },
             unit: {
-                src: ['test/unit/.setup.android.js', 'test/unit/**/*.js']
+                src: ['test/unit/.setup.android.js', 'test/unit/**/*.spec.js']
             },
             androidFunctional: {
                 options: {
                     timeout: 30000
                 },
-                src: ['test/functional/.setup.js', 'test/functional/android/**/*.js']
+                src: ['test/functional/.setup.js', 'test/functional/android/**/*.spec.js']
             }
         },
         run: {
