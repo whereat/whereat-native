@@ -23,7 +23,7 @@ describe("LocationService", () => {
 
     it("should start location polling with correct parameters", () =>{
       const startPolling = sinon.stub(locationProvider, 'startLocationPolling');
-      startLocationPolling(locationProvider);
+      startLocationPolling();
 
       startPolling.should.have.been.calledWith(FREQUENCY, DISTANCE, ACCURACY);
       startPolling.restore();

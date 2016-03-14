@@ -3,8 +3,6 @@ import React, {
   StyleSheet,
   Text,
   View,
-  DeviceEventEmitter,
-  NativeModules
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
