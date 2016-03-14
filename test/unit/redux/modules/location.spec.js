@@ -1,85 +1,69 @@
 import { expect, deep } from "chai"
+import chai from 'chai';
+chai.should();
+import { zucotti, nyse } from '../../../support/sampleLocations';
 
-describe("location module" , () => {
-  const location = require('../../../../src/redux/modules/location')
+import * as location from '../../../../src/redux/modules/location';
 
-  describe("locationReducer", () => {
-    describe("on LOCATION_CHANGED", () => {
-      it("should overwrite currentLocation with new latitude and longitude", () => {
-        const state = {
-          location: {
-            latitude: 51.05,
-            longitude: -0.13,
-            lastUpdatedTime: 1455047952
-          }
-        };
-        const action = {
-          type: location.LOCATION_CHANGED,
-          payload: {
-            location: {
-              latitude: 51.51,
-              longitude: -0.14,
-              lastUpdatedTime: 1455060001
-            }
-          }
-        };
-        const newState = location.reducer(state, action);
-        expect(newState).to.deep.equal({
-          location: {
-            latitude: 51.51,
-            longitude: -0.14,
-            lastUpdatedTime: 1455060001
-          }
-        });
-      });
-      it("should work with undefined state", () => {
-        const action = {
-          type: location.LOCATION_CHANGED,
-          payload: {
-            location: {
-              latitude: 5,
-              longitude: 1,
-              lastUpdatedTime: 30
-            }
-          }
-        }
-        const newState = location.reducer(undefined, action);
-        expect(newState).to.deep.equal({
-          location: {
-            latitude: 5,
-            longitude: 1,
-            lastUpdatedTime: 30
-          }
-        });
-      });
-    });
-    describe("on unrecognized type", () => {
-      it("should not change state", () => {
-        const state = {
-          aProperty: 3
-        };
-        const action = {
-          type: "unrecognized",
-          aProperty: 4
-        };
-        const newState = location.reducer(state, action);
-        expect(newState).to.deep.equal(state);
+describe("location redux module" , () => {
+
+  describe("action creators", () => {
+
+    it("should create action of type LOCATION_CHANGED, setting location property", () => {
+
+      location.locationChanged(zucotti).should.eql({
+        type: location.LOCATION_CHANGED,
+        payload: zucotti
       });
     });
   });
 
-  describe("locationChanged action creator", () => {
-    it("should create action of type LOCATION_CHANGED, setting location property", () => {
-      const aLocation = {
-        latitude: 5,
-        longitude: 1,
-        lastUpdatedTime: 30
-      };
-      expect(location.locationChanged(aLocation)).to.deep.equal({
-        type: location.LOCATION_CHANGED,
-        payload: {
-          location: aLocation
-        }
+  describe("reducers", () => {
+
+    describe("default state", () => {
+
+      it('returns specified initial state by default', () => {
+        location.reducer(undefined, {}).should.eql(location.initialState);
+      });
+    });
+
+    describe("on LOCATION_CHANGED", () => {
+
+      it("should overwrite currentLocation with new latitude and longitude", () => {
+
+        const secondState = location.reducer(location.initialState, {
+          type: location.LOCATION_CHANGED,
+          payload: zucotti
+        });
+
+        secondState.should.eql(zucotti);
+
+        const thirdState = location.reducer(secondState, {
+          type: location.LOCATION_CHANGED,
+          payload: nyse
+        });
+
+        thirdState.should.eql(nyse);
+      });
+
+      it("should work with undefined state", () => {
+
+        const newState = location.reducer(undefined, {
+          type: location.LOCATION_CHANGED,
+          payload: zucotti
+        });
+
+        newState.should.eql(zucotti);
+      });
+    });
+
+    describe("on unrecognized type", () => {
+
+      it("should not change state", () => {
+        const state = { aProperty: 3};
+        const action = { type: "unrecognized", aProperty: 4};
+
+        location.reducer(state, action).should.eql(state);
       });
     });
   });

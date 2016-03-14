@@ -1,9 +1,10 @@
 import chai from 'chai';
 chai.should();
-import {createStore} from 'redux';
-import reducer from '../../../../src/redux/modules/reducer';
 
-import { initialState as initialLocation } from '../../../../src/redux/modules/location';
+import {createStore} from 'redux';
+import reducer from '../../../src/redux/reducer';
+
+import { initialState as initialLocation } from '../../../src/redux/modules/location';
 const subReducers = [{
   key: 'location',
   value: initialLocation

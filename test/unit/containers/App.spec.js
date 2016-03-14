@@ -1,33 +1,25 @@
-import React, { View } from "react";
+import chai from 'chai';
+chai.should();
+
+import React, { View } from "react-native";
+import { createStore } from 'redux';
 import { shallow } from "enzyme";
-import MapView from "../../../src/components/MapView.android.js";
-import { expect } from "chai"
-import { App } from "../../../src/containers/App"
+import reducer from '../../../src/redux/reducer';
 
-describe("App", () => {
+import Root from "../../../src/components/Root";
+import App from '../../../src/containers/App';
 
-  it("should have user's current location", () => {
-    let app = shallow(<App/>);
-    var userLocationView = app.find("View").at(1);
-    expect(userLocationView.find("Text").at(0).children().node).to.contain("LATITUDE: 0");
-    expect(userLocationView.find("Text").at(1).children().node).to.contain("LONGITUDE: 0");
-    expect(userLocationView.find("Text").at(2).children().node).to.contain("LAST UPDATED TIME: 0");
+describe('App container', () => {
+
+  const store = createStore(reducer);
+  const app = shallow(<App store={store}/>);
+  const state = store.getState();
+
+  it('maps state to props', () => {
+    app.find('Root').prop('location').should.eql(state.location);
   });
 
-  describe("MapView", () => {
-    let app = shallow(<App/>);
-
-    it("should exist", () => {
-      expect(app.find(MapView).is("OsmDroidMapView")).to.equal(true);
-
-    });
-
-    it("should have center", () => {
-      expect(app.find(MapView).props().center).to.include.keys("lat", "lon");
-    });
-
-    it("should have zoom level", () => {
-      expect(app.find(MapView).props().zoom).to.be.a('number');
-    });
+  it('maps dispatch to props', () => {
+    app.find('Root').prop('locationChanged').should.exist;
   });
 });

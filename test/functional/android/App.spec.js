@@ -5,8 +5,7 @@ import {
   androidCapabilities
 } from "./../.setup"
 
-import { initialState } from '../../../src/redux/modules/location';
-const { location: initLocation } = initialState;
+import { initialState as initLocation } from '../../../src/redux/modules/location';
 
 describe("App", () => {
   var driver;
@@ -18,7 +17,7 @@ describe("App", () => {
 
   after(() => driver.quit());
 
-  describe("Display", () => {
+  describe("Layout", () => {
 
     it("should display a map", () => {
       return driver
@@ -33,9 +32,6 @@ describe("App", () => {
 
         .elementByXPath('//android.widget.TextView[2]')
         .text().should.become(`LONGITUDE: ${initLocation.longitude}\n`)
-
-        .elementByXPath('//android.widget.TextView[3]')
-        .text().should.become(`LAST UPDATED TIME: ${initLocation.lastUpdatedTime}`)
     });
   });
 
@@ -56,16 +52,8 @@ describe("App", () => {
         .text().should.become('LATITUDE: 20\n')
         .elementByXPath('//android.widget.TextView[2]')
         .text().should.become('LONGITUDE: 20\n')
-
-        .setGeoLocation(30, 30, 0)
-
-        .elementByXPath('//android.widget.TextView[1]')
-        .text().should.become('LATITUDE: 30\n')
-        .elementByXPath('//android.widget.TextView[2]')
-        .text().should.become('LONGITUDE: 30\n')
     });
   });
-
 });
 
 
