@@ -16,7 +16,7 @@ import UserLocationTexBox from '../components/UserLocationTextBox';
 
 export default class Root extends Component {
 
-  static defaultProps = { userLocation: initLoc };
+  static defaultProps = { userLocation: initLoc};
 
   componentDidMount() {
     startLocationPolling(500, 0.1, HIGH_ACCURACY);

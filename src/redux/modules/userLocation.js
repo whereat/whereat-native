@@ -1,29 +1,14 @@
-// action creators
-
-export const USER_LOCATION_CHANGED = "USER_LOCATION_CHANGED";
-
-export const userLocationChanged = userLocation =>  {
-	return {
-		type: USER_LOCATION_CHANGED,
-		payload: userLocation
-	}
-};
-
-// reducers
+import { createAction, handleActions } from 'redux-actions';
 
 export const initialState = {
-	latitude: 40.7092649,
-	longitude: -74.0134507
+  latitude: 40.7092649,
+  longitude: -74.0134507
 };
 
-export const reducer = (state = initialState, action) => {
-	switch(action.type) {
-		case USER_LOCATION_CHANGED:
-			return {
-				...state,
-				...action.payload
-			};
-		default:
-			return state;
-	}
-};
+// action creators
+export const userLocationChanged = createAction('USER_LOCATION_CHANGED');
+
+// reducers
+export const reducer = handleActions({
+  USER_LOCATION_CHANGED: (state, action) => ({ ...state, ...action.payload })
+}, initialState);
