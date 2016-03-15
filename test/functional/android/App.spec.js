@@ -5,8 +5,7 @@ import {
   androidCapabilities
 } from "./../.setup"
 
-import { initialState } from '../../../src/redux/modules/location';
-const { location: initLocation } = initialState;
+import { initialState as initLocation } from '../../../src/redux/modules/userLocation';
 
 describe("App", () => {
   var driver;
@@ -18,7 +17,7 @@ describe("App", () => {
 
   after(() => driver.quit());
 
-  describe("Display", () => {
+  describe("Layout", () => {
 
     it("should display a map", () => {
       return driver
@@ -26,20 +25,17 @@ describe("App", () => {
         .should.eventually.exist
     });
 
-    it("should display default initial location", () => {
+    it("should display default initial userLocation", () => {
       return driver
         .elementByXPath('//android.widget.TextView[1]')
         .text().should.become(`LATITUDE: ${initLocation.latitude}\n`)
 
         .elementByXPath('//android.widget.TextView[2]')
         .text().should.become(`LONGITUDE: ${initLocation.longitude}\n`)
-
-        .elementByXPath('//android.widget.TextView[3]')
-        .text().should.become(`LAST UPDATED TIME: ${initLocation.lastUpdatedTime}`)
     });
   });
 
-  describe("Location updates", () => {
+  describe("UserLocation updates", () => {
 
     it('changes displayed location when GPS location changes', () => {
       return driver
@@ -56,16 +52,8 @@ describe("App", () => {
         .text().should.become('LATITUDE: 20\n')
         .elementByXPath('//android.widget.TextView[2]')
         .text().should.become('LONGITUDE: 20\n')
-
-        .setGeoLocation(30, 30, 0)
-
-        .elementByXPath('//android.widget.TextView[1]')
-        .text().should.become('LATITUDE: 30\n')
-        .elementByXPath('//android.widget.TextView[2]')
-        .text().should.become('LONGITUDE: 30\n')
     });
   });
-
 });
 
 
