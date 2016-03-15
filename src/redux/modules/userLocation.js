@@ -1,11 +1,11 @@
 // action creators
 
-export const LOCATION_CHANGED = "LOCATION_CHANGED";
+export const USER_LOCATION_CHANGED = "USER_LOCATION_CHANGED";
 
-export const locationChanged = location =>  {
+export const userLocationChanged = userLocation =>  {
 	return {
-		type: LOCATION_CHANGED,
-		payload: location
+		type: USER_LOCATION_CHANGED,
+		payload: userLocation
 	}
 };
 
@@ -18,7 +18,7 @@ export const initialState = {
 
 export const reducer = (state = initialState, action) => {
 	switch(action.type) {
-		case LOCATION_CHANGED:
+		case USER_LOCATION_CHANGED:
 			return {
 				...state,
 				...action.payload

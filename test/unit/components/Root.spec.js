@@ -5,25 +5,25 @@ import React, { View } from "react-native";
 import { shallow, render } from "enzyme";
 
 import Root from "../../../src/components/Root";
-import LocationTextBox from '../../../src/components/LocationTextBox';
+import UserLocationTextBox from '../../../src/components/UserLocationTextBox';
 import MapView from "../../../src/components/MapView.android.js";
 
 describe("Root component", () => {
 
   describe("layout", () => {
 
-    describe('LocationTextBox', () => {
+    describe('UserLocationTextBox', () => {
 
       const root = shallow(<Root/>);
 
       it('should exist', () => {
-        root.find(LocationTextBox).is("LocationTextBox").should.be.true;
+        root.find(UserLocationTextBox).is("UserLocationTextBox").should.be.true;
       });
 
       it('should have user location props', () => {
-        const textBox = root.find(LocationTextBox);
-        textBox.props().should.include.keys('location');
-        textBox.props().location.should.include.keys('latitude', 'longitude');
+        const textBox = root.find(UserLocationTextBox);
+        textBox.props().should.include.keys('userLocation');
+        textBox.props().userLocation.should.include.keys('latitude', 'longitude');
       });
     });
 

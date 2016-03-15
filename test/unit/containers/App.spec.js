@@ -16,10 +16,10 @@ describe('App container', () => {
   const state = store.getState();
 
   it('maps state to props', () => {
-    app.find('Root').prop('location').should.eql(state.location);
+    app.find('Root').prop('userLocation').should.eql(state.userLocation);
   });
 
   it('maps dispatch to props', () => {
-    app.find('Root').prop('locationChanged').should.exist;
+    app.find('Root').prop('userLocationChanged').should.exist;
   });
 });

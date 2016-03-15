@@ -3,16 +3,16 @@ import chai from 'chai';
 chai.should();
 import { zucotti, nyse } from '../../../support/sampleLocations';
 
-import * as location from '../../../../src/redux/modules/location';
+import * as userLocation from '../../../../src/redux/modules/userLocation';
 
-describe("location redux module" , () => {
+describe("userLocation redux module" , () => {
 
   describe("action creators", () => {
 
-    it("should create action of type LOCATION_CHANGED, setting location property", () => {
+    it("should create action of type USER_LOCATION_CHANGED, setting userLocation property", () => {
 
-      location.locationChanged(zucotti).should.eql({
-        type: location.LOCATION_CHANGED,
+      userLocation.userLocationChanged(zucotti).should.eql({
+        type: userLocation.USER_LOCATION_CHANGED,
         payload: zucotti
       });
     });
@@ -23,23 +23,23 @@ describe("location redux module" , () => {
     describe("default state", () => {
 
       it('returns specified initial state by default', () => {
-        location.reducer(undefined, {}).should.eql(location.initialState);
+        userLocation.reducer(undefined, {}).should.eql(userLocation.initialState);
       });
     });
 
-    describe("on LOCATION_CHANGED", () => {
+    describe("on USER_LOCATION_CHANGED", () => {
 
       it("should overwrite currentLocation with new latitude and longitude", () => {
 
-        const secondState = location.reducer(location.initialState, {
-          type: location.LOCATION_CHANGED,
+        const secondState = userLocation.reducer(userLocation.initialState, {
+          type: userLocation.USER_LOCATION_CHANGED,
           payload: zucotti
         });
 
         secondState.should.eql(zucotti);
 
-        const thirdState = location.reducer(secondState, {
-          type: location.LOCATION_CHANGED,
+        const thirdState = userLocation.reducer(secondState, {
+          type: userLocation.USER_LOCATION_CHANGED,
           payload: nyse
         });
 
@@ -48,8 +48,8 @@ describe("location redux module" , () => {
 
       it("should work with undefined state", () => {
 
-        const newState = location.reducer(undefined, {
-          type: location.LOCATION_CHANGED,
+        const newState = userLocation.reducer(undefined, {
+          type: userLocation.USER_LOCATION_CHANGED,
           payload: zucotti
         });
 
@@ -63,7 +63,7 @@ describe("location redux module" , () => {
         const state = { aProperty: 3};
         const action = { type: "unrecognized", aProperty: 4};
 
-        location.reducer(state, action).should.eql(state);
+        userLocation.reducer(state, action).should.eql(state);
       });
     });
   });

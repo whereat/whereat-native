@@ -8,38 +8,34 @@ import React, {
   NativeModules
 } from 'react-native';
 
-import { initialState as initLoc } from '../redux/modules/location';
-const LOSTLocationProvider = NativeModules.LOSTLocationProvider;
+import { initialState as initLoc } from '../redux/modules/userLocation';
+const { LOSTLocationProvider: { startLocationPolling, HIGH_ACCURACY } } = NativeModules;
 
 import MapView from '../components/MapView';
-import LocationTexBox from '../components/LocationTextBox';
+import UserLocationTexBox from '../components/UserLocationTextBox';
 
 export default class Root extends Component {
 
-  static defaultProps = { location: initLoc };
+  static defaultProps = { userLocation: initLoc };
 
   componentDidMount() {
-    LOSTLocationProvider.startLocationPolling(500, 0.1, LOSTLocationProvider.HIGH_ACCURACY);
-    this.locationChangedListener = DeviceEventEmitter.addListener(
+    startLocationPolling(500, 0.1, HIGH_ACCURACY);
+    DeviceEventEmitter.addListener(
       'location_changed',
-      (location) => {
-        this.props.locationChanged({
-          ...location,
-        })
-      }
+      userLocation => this.props.userLocationChanged({...userLocation})
     );
   }
 
   render() {
     return (
-      <View style={styles.container} {...this.props}>
-        <LocationTexBox {...this.props}/>
+      <View style={styles.container}>
+        <UserLocationTexBox {...this.props}/>
         <MapView
           style={styles.map}
           zoom={12}
           center={{
-            lat: this.props.location.latitude,
-            lon: this.props.location.longitude
+            lat: this.props.userLocation.latitude,
+            lon: this.props.userLocation.longitude
           }}
         />
       </View>

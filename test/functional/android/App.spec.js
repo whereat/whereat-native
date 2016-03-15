@@ -5,7 +5,7 @@ import {
   androidCapabilities
 } from "./../.setup"
 
-import { initialState as initLocation } from '../../../src/redux/modules/location';
+import { initialState as initLocation } from '../../../src/redux/modules/userLocation';
 
 describe("App", () => {
   var driver;
@@ -25,7 +25,7 @@ describe("App", () => {
         .should.eventually.exist
     });
 
-    it("should display default initial location", () => {
+    it("should display default initial userLocation", () => {
       return driver
         .elementByXPath('//android.widget.TextView[1]')
         .text().should.become(`LATITUDE: ${initLocation.latitude}\n`)
@@ -35,7 +35,7 @@ describe("App", () => {
     });
   });
 
-  describe("Location updates", () => {
+  describe("UserLocation updates", () => {
 
     it('changes displayed location when GPS location changes', () => {
       return driver

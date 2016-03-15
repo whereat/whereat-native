@@ -10,11 +10,11 @@ import React, {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Root from '../components/Root';
-import { locationChanged } from '../redux/modules/location';
+import { userLocationChanged } from '../redux/modules/userLocation';
 
 const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
-  locationChanged: bindActionCreators(locationChanged, dispatch)
+  userLocationChanged: bindActionCreators(userLocationChanged, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Root);
