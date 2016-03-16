@@ -12,9 +12,10 @@ export default class MapViewAdapter extends Component {
         region={{
           latitude: this.props.location.latitude,
           longitude: this.props.location.longitude,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05
+          latitudeDelta: 0.02,
+          longitudeDelta: 0.02
         }}
+        tileOverlayURLTemplate={"http://b.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png"}
         showUserLocation={true}
       />
     );

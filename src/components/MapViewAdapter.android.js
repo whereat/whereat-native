@@ -9,7 +9,7 @@ export default class MapViewAdapter extends Component {
     return(
       <MapView
         style={styles.map}
-        zoom={12}
+        zoom={17}
         center={{
           lat: this.props.location.latitude,
           lon: this.props.location.longitude
