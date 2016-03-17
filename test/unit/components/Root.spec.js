@@ -40,7 +40,7 @@ describe("Root component", () => {
       });
 
       it("should have zoom level", () => {
-        root.find(MapView).props().zoom.should.be.a('number');
+        root.find(MapView).props().zoom.should.exist;
       });
     });
   });
