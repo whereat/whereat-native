@@ -9,7 +9,7 @@ import React, {
 } from 'react-native';
 
 import { initialState as initLoc } from '../redux/modules/userLocation';
-const { LOSTLocationProvider: { startLocationPolling, HIGH_ACCURACY } } = NativeModules;
+import { startLocationPolling, onLocationChanged } from '../services/LocationService.android';
 
 import MapView from '../components/MapView';
 import UserLocationTexBox from '../components/UserLocationTextBox';
@@ -19,11 +19,8 @@ export default class Root extends Component {
   static defaultProps = { userLocation: initLoc};
 
   componentDidMount() {
-    startLocationPolling(500, 0.1, HIGH_ACCURACY);
-    DeviceEventEmitter.addListener(
-      'location_changed',
-      userLocation => this.props.userLocationChanged({...userLocation})
-    );
+    startLocationPolling();
+    onLocationChanged(this.props.userLocationChanged);
   }
 
   render() {

@@ -27,6 +27,7 @@
     "mockery": "^1.4.0",
     "react-dom": "^0.14.7",
     "react-native-mock": "0.0.6",
+    "sinon-chai": "^2.8.0",
     "wd": "^0.4.0"
   }
 }
