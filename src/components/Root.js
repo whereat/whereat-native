@@ -19,7 +19,6 @@ export default class Root extends Component {
   static defaultProps = { userLocation: initLoc};
 
   componentDidMount() {
-    console.log('userlocationchanged', this.props.userLocationChanged);
     startLocationPolling();
     onLocationChanged(this.props.userLocationChanged);
   }
