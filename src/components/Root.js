@@ -9,9 +9,9 @@ import React, {
 } from 'react-native';
 
 import { initialState as initLoc } from '../redux/modules/userLocation';
-import { startLocationPolling, onLocationChanged } from '../services/LocationService.android';
+import { startLocationPolling, onLocationChanged } from '../services/LocationService';
 
-import MapView from '../components/MapView';
+import MapViewAdapter from '../components/MapViewAdapter';
 import UserLocationTexBox from '../components/UserLocationTextBox';
 
 export default class Root extends Component {
@@ -27,14 +27,7 @@ export default class Root extends Component {
     return (
       <View style={styles.container}>
         <UserLocationTexBox {...this.props}/>
-        <MapView
-          style={styles.map}
-          zoom={12}
-          center={{
-            lat: this.props.userLocation.latitude,
-            lon: this.props.userLocation.longitude
-          }}
-        />
+        <MapViewAdapter location={this.props.userLocation}/>
       </View>
     );
   }

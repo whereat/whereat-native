@@ -3,11 +3,6 @@ import {
   NativeModules
 } from 'react-native';
 
-const startLocationPolling = (time, distance, callback) => {
-}
+export const startLocationPolling = () => {}
 
-
-
-export default {
-  startLocationPolling
-};
+export const onLocationChanged = callback => {}

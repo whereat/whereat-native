@@ -1,41 +1,46 @@
-import React, { View } from "react-native";
+import chai from "chai";
 import sinon from 'sinon';
-import { expect } from "chai"
-import { shallow } from "enzyme";
-import LocationService from "../../../src/services/LocationService.android";
+import sinonChai from 'sinon-chai';
+
+chai.should();
+chai.use(sinonChai);
+
+import React, { DeviceEventEmitter } from "react-native";
+
+import {
+  FREQUENCY,
+  DISTANCE,
+  ACCURACY,
+  startLocationPolling,
+  onLocationChanged
+} from "../../../src/services/LocationService.android";
 
 describe("LocationService", () => {
+
+  const locationProvider = React.NativeModules.LOSTLocationProvider;
+
   describe("#startLocationPolling", () => {
-    let LOSTMock, DeviceEventEmitterMock;
-    const time = 500, distance = 0.1;
-    beforeEach(() => {
-      LOSTMock = sinon.mock(React.NativeModules.LOSTLocationProvider);
-      DeviceEventEmitterMock = sinon.mock(React.DeviceEventEmitter);
+
+    it("should start location polling with correct parameters", () =>{
+      const startPolling = sinon.stub(locationProvider, 'startLocationPolling');
+      startLocationPolling();
+
+      startPolling.should.have.been.calledWith(FREQUENCY, DISTANCE, ACCURACY);
+      startPolling.restore();
     });
-    afterEach(() => {
-      LOSTMock.restore();
-      DeviceEventEmitterMock.restore();
-    });
-
-    it("should start location polling with time and distance", () =>{
-      const LOSTExpectation = LOSTMock
-        .expects('startLocationPolling')
-        .withArgs(time, distance);
-
-      LocationService.startLocationPolling(time, distance)
-
-      LOSTExpectation.verify();
-    });
-
-    it("should add a listener for 'location_changed' on DeviceEventEmitter", () => {
-      const DeviceEventEmitterExpectation = DeviceEventEmitterMock
-        .expects('addListener')
-        .withArgs('location_changed');
-
-      LocationService.startLocationPolling(time);
-
-      DeviceEventEmitterMock.verify();
-    }); 
   });
 
+  describe('#onLocationChanged', () => {
+
+    it("should register a callback to handle 'location_changed' events", () => {
+      const spy = sinon.spy();
+      startLocationPolling();
+      onLocationChanged(spy);
+
+      DeviceEventEmitter.emit('location_changed');
+      DeviceEventEmitter.emit('location_changed');
+
+      spy.should.have.been.calledTwice;
+    });
+  });
 });
