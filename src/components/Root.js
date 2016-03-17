@@ -9,7 +9,7 @@ import React, {
 } from 'react-native';
 
 import { initialState as initLoc } from '../redux/modules/userLocation';
-import {startLocationPolling, onLocationChanged } from '../services/LocationService.android';
+import { startLocationPolling, onLocationChanged } from '../services/LocationService.android';
 
 import MapView from '../components/MapView';
 import UserLocationTexBox from '../components/UserLocationTextBox';
@@ -19,6 +19,7 @@ export default class Root extends Component {
   static defaultProps = { userLocation: initLoc};
 
   componentDidMount() {
+    console.log('userlocationchanged', this.props.userLocationChanged);
     startLocationPolling();
     onLocationChanged(this.props.userLocationChanged);
   }
