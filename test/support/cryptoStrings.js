@@ -1,0 +1,1 @@
+export const zucottiHmac = '0c79bc45c9d21ddc8a8766bc08069fcd613a0527a05b7b90f7e1b378f27cfab4';
