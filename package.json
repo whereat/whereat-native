@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "debug-unit": "mocha debug test/unit/**/*.spec.js --compilers js:babel-core/register"
   },
   "dependencies": {
     "react-native": "whereat/react-native#0.20-stable",

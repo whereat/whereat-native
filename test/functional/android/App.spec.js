@@ -5,7 +5,7 @@ import {
   androidCapabilities
 } from "./../.setup";
 
-import { initialState as initLocation } from '../../../src/redux/modules/userLocation';
+import { initialState as initLocation } from '../../../src/reducers/userLocation';
 
 describe("App", () => {
   var driver;

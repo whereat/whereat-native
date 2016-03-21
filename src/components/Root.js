@@ -8,7 +8,7 @@ import React, {
   NativeModules
 } from 'react-native';
 
-import { initialState as initLoc } from '../redux/modules/userLocation';
+import { initialState as initLoc } from '../reducers/userLocation';
 import { startLocationPolling, onLocationChanged } from '../services/LocationService';
 
 import MapViewAdapter from '../components/MapViewAdapter';

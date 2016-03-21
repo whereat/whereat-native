@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { reducer as userLocation } from "./modules/userLocation";
+import userLocation from "./userLocation";
 
 export default combineReducers({
 	userLocation

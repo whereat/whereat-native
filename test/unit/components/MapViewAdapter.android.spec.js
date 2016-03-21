@@ -5,7 +5,7 @@ import React from "react-native";
 import MapView from "../../../src/components/MapView.android";
 import MapViewAdapter from "../../../src/components/MapViewAdapter.android"
 
-describe("MapViewAdapter", () => {
+describe("MapViewAdapter (Android)", () => {
   let mapViewAdapter;
   const location = {
     latitude: 4,

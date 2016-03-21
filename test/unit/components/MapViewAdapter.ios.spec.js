@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import React, { View, MapView } from "react-native";
 import MapViewAdapter from "../../../src/components/MapViewAdapter.ios"
 
-describe("MapViewAdapter", () => {
+describe("MapViewAdapter (iOS)", () => {
   let mapViewAdapter;
   const location = {
     latitude: 4,
