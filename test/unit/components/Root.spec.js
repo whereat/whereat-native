@@ -9,8 +9,7 @@ import { makeFakeDom } from '../../support/FakeDom';
 import React, { View } from "react-native";
 import { shallow, render, mount } from "enzyme";
 import { createStore } from 'redux';
-import reducer from '../../../src/redux/reducer';
-import { userLocationChanged } from '../../../src/redux/modules/userLocation';
+import actions from '../../../src/actions/index';
 
 import App from '../../../src/containers/App';
 import Root from "../../../src/components/Root";
@@ -65,7 +64,7 @@ describe("Root component", () => {
     makeFakeDom();
     const startLocationPolling = sinon.stub(LocationService, 'startLocationPolling');
     const onLocationChanged = sinon.stub(LocationService, 'onLocationChanged');
-    mount(<Root userLocationChanged={sinon.spy()}/>);
+    mount(<Root />);
 
     it('starts location polling', () => {
       startLocationPolling.should.have.been.calledOnce;
