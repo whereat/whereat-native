@@ -9,7 +9,6 @@ import { zucottiHmac } from '../../support/cryptoStrings';
 
 import Root from "../../../src/components/Root";
 import HmacTextBox from '../../../src/components/HmacTextBox';
-import MapView from "../../../src/components/MapView.android.js";
 
 describe('HmacTextBox component', () => {
 
