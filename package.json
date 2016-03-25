@@ -4,17 +4,25 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "debug-unit": "mocha debug test/unit/**/*.spec.js --compilers js:babel-core/register"
+    "debug-unit": "mocha debug test/unit/**/*.spec.js --compilers js:babel-core/register",
+    "postinstall": "rn-nodeify --install crypto,stream,events,vm --hack"
   },
   "dependencies": {
+    "events": "^1.1.0",
     "react-native": "whereat/react-native#0.20-stable",
+    "react-native-crypto": "github:mvayngrib/react-native-crypto#92ebb1b",
     "react-native-lostlocationprovider": "0.0.4",
+    "react-native-randombytes": "^1.0.1",
     "react-redux": "^4.4.0",
+    "readable-stream": "^1.0.33",
     "redux": "^3.3.1",
-    "redux-actions": "^0.9.1"
+    "redux-actions": "^0.9.1",
+    "stream-browserify": "^1.0.0",
+    "vm-browserify": "0.0.4"
   },
   "devDependencies": {
     "appium-android-driver": "^1.7.2",
+    "appium-ios-driver": "^1.8.12",
     "babel-preset-react-native": "^1.5.2",
     "babel-register": "^6.5.2",
     "chai": "^3.5.0",
@@ -28,7 +36,18 @@
     "mockery": "^1.4.0",
     "react-dom": "^0.14.7",
     "react-native-mock": "0.0.6",
+    "rn-nodeify": "^4.1.1",
     "sinon-chai": "^2.8.0",
     "wd": "^0.4.0"
+  },
+  "browser": {
+    "crypto": "react-native-crypto",
+    "_stream_transform": "readable-stream/transform",
+    "_stream_readable": "readable-stream/readable",
+    "_stream_writable": "readable-stream/writable",
+    "_stream_duplex": "readable-stream/duplex",
+    "_stream_passthrough": "readable-stream/passthrough",
+    "stream": "stream-browserify",
+    "vm": "vm-browserify"
   }
 }
