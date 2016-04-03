@@ -18,9 +18,9 @@
 import chai from "chai";
 chai.should();
 
-import { createHmac, hmacLoc } from '../../../src/services/CryptoService';
+import { createHmac, hmacLoc, encrypt, decrypt } from '../../../src/services/CryptoService';
 import { zucotti } from '../../support/sampleLocations';
-import { zucottiHmac } from '../../support/cryptoStrings';
+import { zucottiHmac, heyWhereAtCT } from '../../support/cryptoStrings';
 
 describe('CryptoService', () => {
 
@@ -39,6 +39,22 @@ describe('CryptoService', () => {
     it('computes the hmac for locational data', () => {
       hmacLoc(zucotti).should.eql(zucottiHmac);
     });
+  });
+
+  describe('encrypt', () => {
+
+    it('returns encrypted json string', () => {
+      encrypt('hey, where at?', {salt:"IgLyN2CgyS8=", "iv":"yhgvpSW8b+oPkHvHGlMJCQ=="}).should.eql(heyWhereAtCT);
+    });
+    
+  });
+
+  describe('decrypt', () => {
+    
+    it('decrypts provided string', () => {
+      decrypt(heyWhereAtCT).should.eql('hey, where at?');
+    });
+    
   });
 
 });

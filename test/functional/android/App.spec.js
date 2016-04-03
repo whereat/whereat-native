@@ -85,7 +85,25 @@ describe("App", () => {
         .elementByXPath('//android.widget.TextView[3]')
         .text().should.become('b769476a42397ea08a4dde6d45c5ee7eef286eb738ffb597ac676cff6fc6a207');
     });
-      
+
+    describe('EncryptionTextBox', () => {
+      it('contains initial state and can toggle between encrypt & decrypt modes', () => {
+        return driver
+          .elementByXPath('//android.widget.EditText[1]')
+          .text().should.become('Type your secret message here')
+          .elementByXPath('//android.view.ViewGroup[1]/android.widget.TextView[1]')
+          .text().should.become('encrypt')
+          .elementByXPath('//android.widget.Switch[1]')
+          .text().should.become('OFF')
+
+          .elementByXPath('//android.widget.Switch[1]').tap()
+          .elementByXPath('//android.widget.Switch[1]')
+          .text().should.become('ON')
+          .elementByXPath('//android.view.ViewGroup[1]/android.widget.TextView[1]')
+          .text().should.become('decrypt');
+      });
+    });
+  
   });
   
 });

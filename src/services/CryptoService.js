@@ -33,3 +33,9 @@ export const createHmac = (data) => {
 
 // {} -> hexString
 export const  hmacLoc = (loc) => createHmac(`${loc.latitude}${loc.longitude}`);
+
+// string, object -> string
+export const encrypt = (text, options = {}) => sjcl.encrypt(bitKey, text, options);
+
+// string -> string
+export const decrypt = (ct) => sjcl.decrypt(bitKey, ct);
