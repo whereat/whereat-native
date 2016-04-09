@@ -16,26 +16,44 @@
  */
 
 import sjcl from "../../lib/sjcl";
+const { 
+  codec: { utf8String: { toBits }, hex: { fromBits } }, 
+  misc: { hmac } 
+} = sjcl;
 
-// "dummy" shared secret for now.
-const key = 'shared secret';
-const bitKey = sjcl.codec.utf8String.toBits(key);
-const hmac = new sjcl.misc.hmac(bitKey);
+import { findKey, flow, toPairs, unzip } from 'lodash';
 
-// string -> hexString
-// Computes hmac for provided string
-export const createHmac = (data) => {
+export const keyStore = {};
+keyStore.me = toBits('shared secret');
+keyStore.key1 = toBits('key1');
+keyStore.key2 = toBits('key2');
 
-  const bitSignature = hmac.encrypt(data);
-  return sjcl.codec.hex.fromBits(bitSignature);
+const hash = (key, text) => fromBits(new hmac(key).encrypt(text));
 
+// bitArray (key), string, {} -> string (stringified json)
+export const encrypt = (key, text, options = {}) => sjcl.encrypt(key, text, options);
+
+// bityArray (key), string (ct, stringified json) -> string
+export const decrypt = (key, ct) => sjcl.decrypt(key, ct);
+
+// Signs the provided data. 
+// Takes a key and data, concatenates the vals and stores the keys (in order).
+// bitArray (key), obj -> obj
+export const sign = (key, data) => {
+  const [fields, values] = flow(toPairs, unzip)(data);
+  
+  return {
+      ...data,
+    sig: {
+      fields: fields,
+      hmac: hash(key, values.join(''))
+    }
+  };
 };
 
-// {} -> hexString
-export const  hmacLoc = (loc) => createHmac(`${loc.latitude}${loc.longitude}`);
-
-// string, object -> string
-export const encrypt = (text, options = {}) => sjcl.encrypt(bitKey, text, options);
-
-// string -> string
-export const decrypt = (ct) => sjcl.decrypt(bitKey, ct);
+// obj -> str
+export const verify = (message) => {
+  const joinedVals = message.sig.fields.map(field => message[field]).join('');
+  const keyId = findKey(keyStore, (key) => (hash(key, joinedVals) === message.sig.hmac));
+  return keyId || '';
+};

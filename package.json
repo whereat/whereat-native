@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "events": "^1.1.0",
+    "lodash": "^4.9.0",
     "react-native": "whereat/react-native#0.20-stable",
     "react-native-crypto": "github:mvayngrib/react-native-crypto#92ebb1b",
     "react-native-lostlocationprovider": "0.0.4",
