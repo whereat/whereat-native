@@ -31,7 +31,7 @@ import actions from '../../../src/actions/index';
 import App from '../../../src/containers/App';
 import Root from "../../../src/components/Root";
 import UserLocationTextBox from '../../../src/components/UserLocationTextBox';
-import HmacTextBox from '../../../src/components/HmacTextBox';
+import SignatureTextBox from '../../../src/components/SignatureTextBox';
 import MapViewAdapter from "../../../src/components/MapViewAdapter.android.js";
 
 import * as LocationService from '../../../src/services/LocationService.android'
@@ -56,14 +56,14 @@ describe("Root component", () => {
       });
     });
 
-    describe('HmacTextBox', () => {
+    describe('SignatureTextBox', () => {
 
       it('should exist', () => {
-        root.find(HmacTextBox).is("HmacTextBox").should.be.true;
+        root.find(SignatureTextBox).should.exist;
       });
 
       it('should have user location props', () => {
-        const textBox = root.find(HmacTextBox);
+        const textBox = root.find(SignatureTextBox);
         textBox.props().should.include.keys('userLocation');
         textBox.props().userLocation.should.include.keys('latitude', 'longitude');
       });

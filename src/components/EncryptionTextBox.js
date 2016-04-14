@@ -8,7 +8,7 @@ import React, {
   StyleSheet
 } from 'react-native';
 
-import { encrypt, decrypt } from '../services/CryptoService';
+import { encrypt, decrypt, getKey } from '../services/CryptoService';
 
 export default class EncryptionTextBox extends Component {
   
@@ -16,7 +16,8 @@ export default class EncryptionTextBox extends Component {
     super();
     this.state = {
       text: 'Type your secret message here',
-      decryptMode: false
+      decryptMode: false,
+      key: getKey('me')
     };
   }
   
@@ -45,10 +46,10 @@ export default class EncryptionTextBox extends Component {
 
   cryptoAction(){
     if (this.state.decryptMode) {
-      this.setState({text: decrypt(this.state.text)});
+      this.setState({text: decrypt(this.state.key, this.state.text)});
       this.setState({decryptMode: false});
     } else {
-      this.setState({text: encrypt(this.state.text)});
+      this.setState({text: encrypt(this.state.key, this.state.text)});
       this.setState({decryptMode: true});
     }
   }

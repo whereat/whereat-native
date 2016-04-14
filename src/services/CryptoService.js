@@ -30,6 +30,8 @@ keyStore.key2 = toBits('key2');
 
 const hash = (key, text) => fromBits(new hmac(key).encrypt(text));
 
+export const getKey = (id) => keyStore[id];
+
 // bitArray (key), string, {} -> string (stringified json)
 export const encrypt = (key, text, options = {}) => sjcl.encrypt(key, text, options);
 

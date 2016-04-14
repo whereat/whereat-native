@@ -16,9 +16,9 @@
  */
 
 import chai from "chai";
-chai.should();
+const should = chai.should();
 
-import { encrypt, decrypt, sign, verify } from '../../../src/services/CryptoService';
+import { encrypt, decrypt, sign, verify, getKey } from '../../../src/services/CryptoService';
 import { heyWhereAtCT } from '../../support/cryptoStrings';
 
 import sjcl from "../../../lib/sjcl";
@@ -110,6 +110,18 @@ describe('CryptoService', () => {
       
     });
 
+  });
+
+  describe('getKey', ()=>{
+    it('returns the key for the given id',() =>{
+      getKey('key1').should.eql(toBits('key1'));
+      getKey('me').should.eql(toBits('shared secret'));
+          
+    });
+    it('returns undefined if the keyStore does not have the key', () =>{
+      should.not.exist(getKey('notAKey'));
+    });
+    
   });
 
 });

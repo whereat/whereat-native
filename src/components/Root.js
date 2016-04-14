@@ -30,7 +30,7 @@ import { startLocationPolling, onLocationChanged } from '../services/LocationSer
 
 import MapViewAdapter from '../components/MapViewAdapter';
 import UserLocationTexBox from '../components/UserLocationTextBox';
-import HmacTextBox from '../components/HmacTextBox';
+import SignatureTextBox from '../components/SignatureTextBox';
 import EncryptionTextBox from '../components/EncryptionTextBox';
 
 export default class Root extends Component {
@@ -48,7 +48,7 @@ export default class Root extends Component {
         <UserLocationTexBox {...this.props}/>
         <EncryptionTextBox/>
         <MapViewAdapter location={this.props.userLocation} />
-        <HmacTextBox {...this.props}/>
+        <SignatureTextBox {...this.props}/>
       </View>
     );
   }
