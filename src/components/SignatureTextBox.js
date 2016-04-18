@@ -22,7 +22,7 @@ import React, {
   PropTypes,
 } from 'react-native';
 
-import { hmacLoc } from '../services/CryptoService';
+import { sign, getKey } from '../services/CryptoService';
 
 export default class HmacTextBox extends Component {
 
@@ -36,7 +36,7 @@ export default class HmacTextBox extends Component {
   render(){
     return(
       <View>
-        <Text>{hmacLoc(this.props.userLocation)}</Text>
+        <Text>{JSON.stringify(sign(getKey('me'),this.props.userLocation).sig)}</Text>
       </View>
     );
   }

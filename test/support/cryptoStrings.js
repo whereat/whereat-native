@@ -16,3 +16,9 @@
  */
 
 export const zucottiHmac = '0c79bc45c9d21ddc8a8766bc08069fcd613a0527a05b7b90f7e1b378f27cfab4';
+
+export const heyWhereAtCT = '{"iv":"yhgvpSW8b+oPkHvHGlMJCQ==","v":1,"iter":1000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","ct":"H7mZ0bVkx9JRhdCNnkCTHTO3Uom2wg=="}';
+
+export const meetMeInTheParkCT = '{"iv":"4mRh8qosGeADmEKOnmXgwg==","v":1,"iter":1000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","ct":"jKrCHEIeL6QLnjLYAVglCkXaa0xvyNsNe4+J"}';
+
+export const thisIsTheModernWorldCT = '{"iv":"THlGdj2CLWJ9STRmoNsANg==","v":1,"iter":1000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","ct":"bGYLHg8xsluxuhl2my0FYdvPyfUatpkF5H2kkEyz40I="}';

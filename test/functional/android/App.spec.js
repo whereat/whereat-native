@@ -23,13 +23,14 @@ import {
 } from "./../.setup";
 
 import { initialState as initLocation } from '../../../src/reducers/userLocation';
+import { thisIsTheModernWorldCT } from '../../support/cryptoStrings';
 
 describe("App", () => {
   var driver;
 
   before(() => {
     driver = wd.promiseChainRemote({host: 'localhost', port: 4723});
-    return driver.init(androidCapabilities).setImplicitWaitTimeout(20000);
+    return driver.init(androidCapabilities).setImplicitWaitTimeout(25000);
   });
 
   after(() => driver.quit());
@@ -72,20 +73,94 @@ describe("App", () => {
     });
   });
 
-  describe('Cryptographic Functionality', () => {
-    it('calculates & displays hmac of latlng when location changes', () => {
-
+  describe('Cryptographic Functionality', function(){
+    this.timeout(100000);
+    
+    it('calculates & displays signature of latlng when location changes', () => {
+      let HmacBeforeChange = null;
+      
       return driver
         .setGeoLocation(10,10, 0)
 
-        .elementByXPath('//android.widget.TextView[3]')
-        .text().should.become('e4573a4994b4b2a846b83178eb3aea9f060893bdffed49e8b115d1093d02a168')
-
+        .elementByXPath('//android.widget.TextView[3]').text()
+        .then( text => {
+          let sig = JSON.parse(text);
+          sig.fields.should.include.members(['latitude', 'longitude']);
+          sig.hmac.should.have.lengthOf(64);
+        })
         .setGeoLocation(20, 20, 0)
-        .elementByXPath('//android.widget.TextView[3]')
-        .text().should.become('b769476a42397ea08a4dde6d45c5ee7eef286eb738ffb597ac676cff6fc6a207');
+        .elementByXPath('//android.widget.TextView[3]').text()
+        .then( text => {
+          let sig = JSON.parse(text);
+          sig.fields.should.include.members(['latitude', 'longitude']);
+          sig.hmac.should.have.lengthOf(64);
+          sig.hmac.should.not.eql(HmacBeforeChange);
+        });
+        
     });
+
+    describe('EncryptionTextBox', () => {
+
+      it('contains initial state and can toggle between encrypt & decrypt modes', () => {
+        return driver
+          .elementByXPath('//android.widget.EditText[1]')
+          .text().should.become('Type your secret message here')
+          .elementByXPath('//android.view.ViewGroup[1]/android.widget.TextView[1]')
+          .text().should.become('encrypt')
+          .elementByXPath('//android.widget.Switch[1]')
+          .text().should.become('OFF')
+
+          .elementByXPath('//android.widget.Switch[1]').tap()
+          .elementByXPath('//android.widget.Switch[1]')
+          .text().should.become('ON')
+          .elementByXPath('//android.view.ViewGroup[1]/android.widget.TextView[1]')
+          .text().should.become('decrypt');
+         
+      });
+
+      it('Encrypts text', function(){
+        
+        return driver
+          .elementByXPath('//android.widget.Switch[1]').tap()
+          .elementByXPath('//android.widget.Switch[1]')
+          .text().should.become('OFF')
+          .elementByXPath('//android.widget.EditText[1]')
+          .clear()
+          .elementByXPath('//android.widget.EditText[1]')
+          .type('This is my important message')
+          .elementByXPath('//android.view.ViewGroup[1]/android.widget.TextView[1]')
+          .tap()
+          .elementByXPath('//android.widget.EditText[1]')
+          .text()
+          .then( text => {
+            let encryptedJSON = JSON.parse(text);
+            encryptedJSON.iter.should.eql(1000);
+            encryptedJSON.ks.should.eql(128);
+            encryptedJSON.ts.should.eql(64);
+            encryptedJSON.mode.should.eql('ccm');
+            encryptedJSON.cipher.should.eql('aes');
+            encryptedJSON.ct.should.exist;
+            encryptedJSON.iv.should.exist;
+          })
+          .elementByXPath('//android.widget.EditText[1]')
+          .clear();
+
+      });
+
+      it('Decrypts text that is pasted ("typed") in', () => { 
+        return driver
+          .elementByXPath('//android.widget.EditText[1]')
+          .clear()
+          .elementByXPath('//android.widget.EditText[1]')
+          .type(thisIsTheModernWorldCT)
+          .elementByXPath('//android.view.ViewGroup[1]/android.widget.TextView[1]')
+          .tap()
+          .elementByXPath('//android.widget.EditText[1]')
+          .text().should.become('this is the modern world');
+      });
       
+    });
+  
   });
   
 });

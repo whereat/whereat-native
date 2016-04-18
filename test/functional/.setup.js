@@ -25,7 +25,7 @@ chaiAsPromised.transferPromiseness = wd.transferPromiseness;
 
 const androidCapabilities = {
     browserName: '',
-    'appium-version': '1.5.0',
+    'appium-version': '1.5.1',
     appPackage: "io.whereat.mobile",
     appActivity: ".MainActivity",
     platformName: 'Android',
